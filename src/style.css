@@ -1,0 +1,189 @@
+:root {
+  --bg: #e9eef1;
+  --card: #f6f9fa;
+  --ink: #0f1c26;
+  --muted: #52636f;
+  --line: #c5d0d7;
+  --accent: #1f4fd8;
+  --accent-ink: #ffffff;
+  --ok: #1d7a46;
+  color-scheme: light dark;
+}
+:root[data-accent="uk"] { --accent: #b3202f; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e171d;
+    --card: #15222a;
+    --ink: #e7eef2;
+    --muted: #93a4b0;
+    --line: #25343e;
+    --accent: #7aa2ff;
+    --accent-ink: #0b1220;
+    --ok: #5fd08f;
+  }
+  :root[data-accent="uk"] { --accent: #ff7b88; }
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--bg);
+  font-family: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+main {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.sub { margin: 0.5rem 0 0; color: var(--muted); max-width: 34rem; }
+
+section { display: grid; gap: 0.75rem; }
+
+.accent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.accent button {
+  font: inherit;
+  font-size: 1.75rem;
+  font-weight: 800;
+  padding: 1rem;
+  border-radius: 0.9rem;
+  border: 2px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.accent button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.field { display: grid; gap: 0.25rem; }
+.field > span { font-size: 0.9rem; color: var(--muted); }
+
+select, input[type="text"] {
+  font: inherit;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.6rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  width: 100%;
+}
+
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0.6rem;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  padding: 0.65rem 1rem;
+}
+
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.primary {
+  width: 100%;
+  font-size: 1.15rem;
+  font-weight: 600;
+  padding: 1.1rem 1rem;
+  border-radius: 0.9rem;
+  border: 0;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.primary.live { background: var(--ink); color: var(--bg); }
+
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+progress { width: 100%; height: 0.5rem; accent-color: var(--accent); }
+
+#status { margin: 0; color: var(--muted); min-height: 1.5em; }
+
+.interim {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  min-height: 3.2rem;
+  border-radius: 0.7rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+.lag { font-weight: 400; color: var(--accent); margin-left: 0.5rem; }
+
+.log {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.log li {
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.5rem;
+  background: var(--card);
+  border-left: 5px solid var(--line);
+}
+
+.log li[data-state="waiting"] { border-left-color: var(--line); color: var(--muted); }
+.log li[data-state="speaking"] { border-left-color: var(--accent); font-weight: 600; }
+.log li[data-state="done"] { border-left-color: var(--ok); }
+.log li[data-state="failed"] { border-left-color: #c0392b; color: #c0392b; }
+
+.type { display: grid; grid-template-columns: 1fr auto; gap: 0.5rem; }
+
+details {
+  border: 1px solid var(--line);
+  border-radius: 0.8rem;
+  padding: 0.75rem 1rem;
+  background: var(--card);
+}
+
+summary { cursor: pointer; font-weight: 600; }
+
+.settings { display: grid; gap: 1rem; margin-top: 1rem; }
+
+.check { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem; align-items: start; }
+
+.row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .primary.live { animation: breathe 2.4s ease-in-out infinite; }
+  @keyframes breathe { 50% { opacity: 0.82; } }
+}
